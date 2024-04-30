@@ -1,6 +1,10 @@
 # Exercise Badges
 
-![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex1) ![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex2) ![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex3) ![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex4) ![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex5)
+![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex1) 
+![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex2)
+![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex3)
+![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex4) 
+![](https://byob.yarr.is/asitm55/made-SS24-Asit_M_CT/score_ex5)
 
 # Methods of Advanced Data Engineering Template Project
 
