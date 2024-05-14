@@ -1,43 +1,45 @@
-pipeline TreePipeline {
+pipeline Trees{
 
-    DataFetcher -> TextParser -> CSVProcessor -> TableFormatter -> DatabaseLoader;
 
-    block DataFetcher oftype HttpDataExtractor {
-        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv
-";
+    TressExtractor -> toText -> toCSV -> toTable -> toDb;
+
+
+    block TressExtractor oftype HttpExtractor{
+        url:"https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
     }
 
-    block TextParser oftype TextHandler {}
 
-    block CSVProcessor oftype CSVHandler {
-        delimiter: ";";
+    block toText oftype TextFileInterpreter{}
+
+    block toCSV oftype CSVInterpreter{
+        delimiter:";";
     }
 
-    block TableFormatter oftype TableHandler {
+    block toTable oftype TableInterpreter{
         header: true;
-        columns: [
-            "sequence_number" oftype integer,
-            "city_district" oftype districtFilter,
-            "location" oftype text,
-            "botanical_tree_name" oftype text,
-            "identifier" oftype text,
-            "tree_family" oftype text
+        columns:[
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype filterType,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            "id" oftype text,
+            "baumfamilie" oftype text
+        ];
+    
+    }
+
+    block toDb oftype SQLiteLoader{
+        table:"trees";
+        file:"./trees.sqlite";
+    }
+
+}
+
+    valuetype filterType oftype text {
+        constraints:[
+            furthOnly
         ];
     }
 
-    block DatabaseLoader oftype SQLiteDatabaseHandler {
-        table: "trees_data";
-        file: "./trees_data.sqlite";
-    }
-
-}
-
-valuetype districtFilter oftype text {
-    constraints: [
-        filterByDistrict
-    ];
-}
-
-constraint filterByDistrict on text {
+    constraint furthOnly on text:
     value matches /Furth-.*/;
-}
