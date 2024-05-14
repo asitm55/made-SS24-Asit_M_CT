@@ -1,12 +1,12 @@
-    // 1. This Jayvee model describes a pipeline 
-// from a CSV file in the web 
-// to a SQLite file with constraints on the data as mentioned in exercise slide.
+    // This Jayvee model outlines a pipeline that processes a CSV file from the web
+    // and loads it into an SQLite database, applying specific data constraints as specified in the exercise slide.
+
 
 pipeline TreesPipeline {
-    // See here for meta-data of the data source
+    // here is the source of data given in the excerise intruction.
     // https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv
 
-    // 2. We define the pipeline structure by referencing the blocks used.
+    // 2. here I am  defining the pipeline structure by referencing the blocks used.
     TreesHttpExtractor
         -> TreesTextFileInterpreter
         -> TreesCSVInterpreter
@@ -16,7 +16,7 @@ pipeline TreesPipeline {
         -> TreesTableInterpreter
         -> TreesSQLiteLoader;
 
-    // 3. After the pipeline structure, we define the blocks used.
+    // 3. After the pipeline structure, I am defining the blocks used.
     block TreesHttpExtractor oftype HttpExtractor {
         url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
     }
@@ -31,9 +31,10 @@ pipeline TreesPipeline {
         header: true;
         columns: [
 
-            // 4.Here we are using the column names from the CSV file
-            // to define the schema of the SQLite table.
-            // The types of the columns are inferred from the data.
+        //We are using the column names from the CSV file
+        // to define the schema of the SQLite table.
+        // The column types are inferred from the data.
+
 
             "lfd_nr" oftype integer,
             "stadtteil" oftype ValidCity,
@@ -45,7 +46,7 @@ pipeline TreesPipeline {
         ];
     }
 
-    // 4. We delete the column E from the table as it is not required.
+    // 4. We will delete the column E from the table as its not needed.
     block TreesColumnDeleter oftype ColumnDeleter {
         delete: [column E];
     }
@@ -56,13 +57,13 @@ pipeline TreesPipeline {
     }
 
 }
-// 5. We define constraints on the stadtteil to ensure it is valid according to the schema.
+// 5. We define mapping condtion on the stadtteil to make sure it is legal according to the schema.
 valuetype ValidCity oftype text {
     constraints: [
         OnlyCityList,
     ];
 }
-// 6. We define constraints on the coordinates to ensure it is valid according to the schema.
+// 6. We define mapping condition on the coordinates to make sure it is legal according to the schema.
 valuetype ValidIds oftype text {
     constraints: [
         OnlyValidIds,
@@ -71,12 +72,12 @@ valuetype ValidIds oftype text {
 
 
 
-// 7. This constraint ensures that the stadtteil is one of the valid values.For e.g, Furth-Mitte, Furth-Süd, Furth-Nord.
+// 7. This mapping condtion make sure that the stadtteil is one of the legal values. For e.g, Furth-Mitte, Furth-Süd, Furth-Nord.
 constraint OnlyCityList on text:
     value in ["Furth-Mitte","Furth-Süd","Furth-Nord"];
 
 
-// 8. This constraint ensures that the coordinates are in the format of "x.x, y.y".
+// 8. This mapping condtion make sure that the coordinates are in the format of "x.x, y.y".
 constraint OnlyValidIds on text:
     value matches /^\d{1,3}\.\d+, \d{1,3}\.\d+$/;
 
