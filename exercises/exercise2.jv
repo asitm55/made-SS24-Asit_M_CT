@@ -3,7 +3,8 @@ pipeline TreePipeline {
     DataFetcher -> TextParser -> CSVProcessor -> TableFormatter -> DatabaseLoader;
 
     block DataFetcher oftype HttpDataExtractor {
-        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv
+";
     }
 
     block TextParser oftype TextHandler {}
