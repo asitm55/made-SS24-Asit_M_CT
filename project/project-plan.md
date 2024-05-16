@@ -17,8 +17,7 @@ My plan is to explore how industrialization affects the environment negatively w
 
 * Data URL: "https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data"
 * Data Type: CSV
-
-Short description of the DataSource. 
+  
 
 ## Work Packages
 
