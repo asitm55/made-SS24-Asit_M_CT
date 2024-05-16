@@ -2,12 +2,12 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Awesome MADE project.
+India Air Quality Data
 
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. Does writing an example question help students write better project plans?
+1. How the Air Quality has been changed during the year depend on facotrs like change in environmental policy, growing economy, green energy? 
 
 ## Description
 
@@ -19,8 +19,8 @@ XY is an important problem, because... This projects analyzes XY, using method A
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+
+* Data URL: "https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data"
 * Data Type: CSV
 
 Short description of the DataSource.
