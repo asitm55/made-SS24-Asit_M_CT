@@ -6,7 +6,7 @@ import sqlite3
 # Define the URLs of the datasets
 dataset_urls = [
     'https://www.kaggle.com/datasets/rohanrao/air-quality-data-in-india',
-    'https://www.kaggle.com/datasets/rohanrao/air-quality-data-in-india'
+    'https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data'
 ]
 
 # Define the data directory
