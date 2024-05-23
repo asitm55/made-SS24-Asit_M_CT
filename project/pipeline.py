@@ -7,7 +7,7 @@ import sqlite3
 dataset_url = 'https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data'
 
 # Define the data directory
-data_dir = '/data'
+data_dir = 'data'
 os.makedirs(data_dir, exist_ok=True)
 
 # Fetch the dataset
