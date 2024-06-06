@@ -1,3 +1,23 @@
+//    Pipeline Structure: Define the blocks involved in the pipeline.
+//    Block Descriptions: Describe the function of each block after defining the structure.
+//    Handling German Umlauts: Ensure proper encoding settings are used for German Umlauts.
+//    CSV Delimiter: The CSV file uses a semicolon (;) as the delimiter.
+//    Data Cleaning:
+
+    //    Remove the first 8 rows as they are unnecessary.
+    //    Delete columns E to AR to clean up the data.
+
+//    SQLite Schema: Define the schema for the SQLite table to organize the data.
+//    Create SQLite File: Generate a SQLite file using the defined schema.
+//    Data Constraints:
+
+    //    Apply constraints to the columns to ensure data integrity.
+    //    Ensure the "Month" column contains only German month names.
+    //    Ensure all integer entries are positive values.
+    //    Ensure the "goods_id" column follows the format NST7-XXX.
+
+
+
 pipeline TrainTransportPipeline
 {
     TrainTransportExtractor
