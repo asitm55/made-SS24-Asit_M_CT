@@ -6,11 +6,12 @@ pipeline TemperaturePipeline {
         -> TemperatureCSVInterpreter;
 
     TemperatureCSVInterpreter
+        -> TemperatureCellWriter01
+        -> TemperatureCellWriter02
         -> TemperatureTableInterpreter
         -> CelsiusToFahrenheitTransformer01
         -> CelsiusToFahrenheitTransformer02
-        -> TemperatureCellWriter01
-        -> TemperatureCellWriter02
+        -> TemperaturesColumnDeleter
         -> TemperatureSQLiteLoader;
 
     // Block to download and unzip the data
@@ -32,18 +33,12 @@ pipeline TemperaturePipeline {
     block TemperatureCSVInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
-
-    // Block to select the required columns from the CSV file
-    block TemperatureColumnSelector oftype ColumnSelector {
-        columns: [
-            "Geraet",
-            "Hersteller",
-            "Model",
-            "Monat",
-            "Temperatur in °C (DWD)",
-            "Batterietemperatur in °C"
-        ];
+    // There can be multiple temperature measurements per row
+    block TemperaturesColumnDeleter oftype ColumnDeleter {
+        // You can ignore all columns to the right of the first “​​Geraet aktiv”
+        delete: [column F, column G, column H, column I];
     }
+
     // Block to write headers in the specified cell range
     block TemperatureCellWriter01 oftype CellWriter {
         at: range A1:E1;
@@ -60,7 +55,7 @@ pipeline TemperaturePipeline {
     transform CelsiusToFahrenheit {
         from Celsius oftype decimal;
         to Fahrenheit oftype decimal;
-        Fahrenheit: (Celsius * 9/5) + 32;
+        Fahrenheit: (Celsius * 1.8) + 32;
     }
 
     // Block to apply the transformation to the temperature column
