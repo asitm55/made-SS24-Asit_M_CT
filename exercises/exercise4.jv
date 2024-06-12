@@ -6,13 +6,12 @@ pipeline TemperaturePipeline {
         -> TemperatureCSVInterpreter;
 
     TemperatureCSVInterpreter
-        -> TemperatureColumnSelector
-        -> TemperatureColumnDeleter
-        -> TemperatureCellWriter
-        -> TemperatureCellWriter2
         -> TemperatureTableInterpreter
-        -> CelsiusToFahrenheitTransformer
-        -> CelsiusToFahrenheitTransformer2
+        -> CelsiusToFahrenheitTransformer01
+        -> CelsiusToFahrenheitTransformer02
+        -> TemperatureColumnDeleter
+        -> TemperatureCellWriter01
+        -> TemperatureCellWriter02
         -> TemperatureSQLiteLoader;
 
     // Block to download and unzip the data
@@ -22,7 +21,7 @@ pipeline TemperaturePipeline {
 
     // Block to specify the path to the extracted CSV file
     block TemperatureFilePicker oftype FilePicker {
-        path: "data.csv";
+        path: "/data.csv";
     }
 
     // Block to interpret the text file with utf8 encoding
