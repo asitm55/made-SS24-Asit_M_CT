@@ -44,20 +44,14 @@ pipeline TemperaturePipeline {
             "Batterietemperatur in °C"
         ];
     }
-
-    // Block to delete unnecessary columns from the CSV file
-    //block TemperatureColumnDeleter oftype ColumnDeleter {
-       // delete: [column G, column H, column I];
-    //}
-
     // Block to write headers in the specified cell range
-    block TemperatureCellWriter oftype CellWriter {
+    block TemperatureCellWriter01 oftype CellWriter {
         at: range A1:E1;
         write: ['id', 'producer', 'model', 'month', 'temperature'];
     }
 
     // Block to write the header for battery_temperature
-    block TemperatureCellWriter2 oftype CellWriter {
+    block TemperatureCellWriter02 oftype CellWriter {
         at: cell J1;
         write: ['battery_temperature'];
     }
@@ -70,14 +64,14 @@ pipeline TemperaturePipeline {
     }
 
     // Block to apply the transformation to the temperature column
-    block CelsiusToFahrenheitTransformer oftype TableTransformer {
+    block CelsiusToFahrenheitTransformer01 oftype TableTransformer {
         inputColumns: ['temperature'];
         outputColumn: 'temperature';
         use: CelsiusToFahrenheit;
     }
 
     // Block to apply the transformation to the battery_temperature column
-    block CelsiusToFahrenheitTransformer2 oftype TableTransformer {
+    block CelsiusToFahrenheitTransformer02 oftype TableTransformer {
         inputColumns: ['battery_temperature'];
         outputColumn: 'battery_temperature';
         use: CelsiusToFahrenheit;
