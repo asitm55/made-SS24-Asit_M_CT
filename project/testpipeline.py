@@ -1,30 +1,40 @@
-%%writefile test_pipeline.py
+import os
+import unittest
 
-import sqlite3
-import pytest
+def verify_directories_and_files(base_directory, dataset_folders):
+    verification_results = {}
+    for folder in dataset_folders:
+        folder_path = os.path.join(base_directory, folder)
+        if os.path.isdir(folder_path):
+            print(f"Directory found: {folder_path}")
+            # Verify that the directory is not empty
+            if os.listdir(folder_path):
+                verification_results[folder] = True
+            else:
+                print(f"Directory is empty: {folder_path}")
+                verification_results[folder] = False
+        else:
+            print(f"Directory not found: {folder_path}")
+            verification_results[folder] = False
+    return verification_results
 
-@pytest.fixture
-def db_connection():
-    # Connect to the SQLite database (replace with your database file name)
-    connection = sqlite3.connect('your_database.db')
-    yield connection
-    connection.close()
+class DatasetTest(unittest.TestCase):
+    def setUp(self):
+        self.base_directory = "../data"
+        self.dataset_folders = [
+            "shrutibhargava94-india-air-quality-data",
+            "rohanrao-air-quality-data-in-india",
+            "abhisheksjha-time-series-air-quality-data-of-india-2010-2023",
+            "fedesoriano-air-quality-data-in-india",
+            "neomatrix369-air-quality-data-in-india-extended"
+        ]
 
-def test_connection(db_connection):
-    cursor = db_connection.cursor()
-    cursor.execute("SELECT 1")
-    assert cursor.fetchone() == (1,)
+    def test_directories_and_files_exist(self):
+        expected_results = {folder: True for folder in self.dataset_folders}
+        results = verify_directories_and_files(self.base_directory, self.dataset_folders)
+        self.assertEqual(results, expected_results)
+        if results == expected_results:
+            print("Success: All directories and files exist.")
 
-def test_table_exists(db_connection):
-    cursor = db_connection.cursor()
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='air_quality';")
-    assert cursor.fetchone() is not None
-
-def test_data_integrity(db_connection):
-    cursor = db_connection.cursor()
-    cursor.execute("SELECT COUNT(*) FROM air_quality")
-    count = cursor.fetchone()[0]
-    assert count > 0
-
-    cursor.execute("SELECT City FROM air_quality WHERE City='Visakhapatnam'")
-    assert cursor.fetchone() is not None
+if __name__ == "__main__":
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)
