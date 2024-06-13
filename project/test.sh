@@ -1,8 +1,22 @@
-#!/bin/bash
+%%bash
 
-export PYTHONPATH=$(pwd)/..
+# Print setup message
+echo "Setting up the test environment..."
 
-echo "Running unit tests..."
-pytest ../tests/testpipeline.py
+# Install pytest
+pip install pytest
 
+# Print test running message
+echo "Running tests..."
 
+# Run pytest for your test script
+pytest test_pipeline.py
+
+# Print completion message
+echo "Tests completed."
+
+# Clean up environment
+echo "Cleaning up test environment..."
+rm -f your_database.db
+
+echo "Test environment cleaned up."
