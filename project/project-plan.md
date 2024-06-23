@@ -16,7 +16,8 @@ My plan is to explore how industrialization affects the environment negatively w
 ## Datasources
 
 ## Datasources
-
+  # All India Automobile production and effect of AirQuality. so We have two types of dataset one is based on Air Quality and Automobile production.
+*Data url : "https://data.gov.in/files/ogdpv2dms/s3fs-public/datafile/Table-20.6-All_India_SYB2016_1.csv"   
 * Data URL: "https://www.kaggle.com/datasets/rohanrao/air-quality-data-in-india"
 * Data URL: "https://www.kaggle.com/datasets/abhisheksjha/time-series-air-quality-data-of-india-2010-2023"
 * Data URL: "https://www.kaggle.com/datasets/fedesoriano/air-quality-data-in-india"
