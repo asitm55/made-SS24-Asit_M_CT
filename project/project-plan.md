@@ -17,7 +17,6 @@ My plan is to explore how industrialization affects the environment negatively w
 
 ## Datasources
 
-* Data URL: "https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data"
 * Data URL: "https://www.kaggle.com/datasets/rohanrao/air-quality-data-in-india"
 * Data URL: "https://www.kaggle.com/datasets/abhisheksjha/time-series-air-quality-data-of-india-2010-2023"
 * Data URL: "https://www.kaggle.com/datasets/fedesoriano/air-quality-data-in-india"
