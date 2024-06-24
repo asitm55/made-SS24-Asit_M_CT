@@ -1,3 +1,5 @@
 #!/bin/bash
-pip3 install kaggle
-python3 ./pipeline.py
+pip install kaggle requests pysqlite3 shutils zipfile
+pip install pandas
+python ./pipeline.py
+
