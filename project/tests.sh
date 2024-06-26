@@ -5,7 +5,7 @@ echo "Setting up the test environment..."
 
 # Print completion message
 echo "Running Test."
-python automated_test.py
+python3 automated_test.py
 if [ $? -ne 0 ]; then
     echo "Test Failed"
     exit 1
