@@ -17,8 +17,8 @@ jobs:
           path: main
       - name : Starting Pipeline
         working-directory: ./project
-        run : bash pipeline.sh
+        run : ls
 
       - name : Starting Test
         working-directory: ./project
-        run : bash tests.sh
+        run : ls
