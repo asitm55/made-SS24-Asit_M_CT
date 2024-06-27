@@ -1,0 +1,86 @@
+pipeline GTFSStopsProcessing {
+
+    //Step 1.  Extracting  GTFS data from given pipline structure.
+
+    gtfsStopsProcessingExtractor -> gtfsFilePicker 
+    -> gtfsTextFileInterpreter -> gtfsCSVInterpreter;
+
+    // Step 2.Transformation and loading of data consdering the structure.
+
+    gtfsCSVInterpreter -> gtfsColumnDeleter 
+    -> gtfsTableInterpreter -> gtfsSQLiteLoader;
+
+    // Step 3. Block to download the GTFS dataset
+
+    block gtfsStopsProcessingExtractor oftype GTFSExtractor {
+        url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+    }
+
+    // Step 4. Reading  the stops text  file in UTF-8 encoding
+
+    block gtfsTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "utf8";
+    }
+
+    // Step 5. Parsing  the text file into  CSV
+
+    block gtfsCSVInterpreter oftype CSVInterpreter { 
+        delimiter: ",";
+        enclosing: '"';
+    }
+    
+    // Step 6. Picks the stops text file from the extracted dataset 
+
+    block gtfsFilePicker oftype FilePicker {
+        path: "/stops.txt";
+    }
+
+    // Step 7. Deleting the  columns with thier reference name from the  CSV.
+
+    block gtfsColumnDeleter oftype ColumnDeleter {
+        delete: [ 
+            column B,  
+            column D,
+            column H,
+            column I,
+            column J,
+            column K,
+            column L
+        ];
+    }
+
+    //Step 8. Now we will convert the remaining data into a structured table form.
+
+    block gtfsTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "stop_id" oftype integer,   
+            "stop_name" oftype text,    
+            "stop_lat" oftype decimal,  
+            "stop_lon" oftype decimal,  
+            "zone_id" oftype zone_id   
+        ];
+    }
+
+    //Step 9. Loading the processed data into a SQLite DB
+
+    block gtfsSQLiteLoader oftype SQLiteLoader {
+        table: "stops";      
+        file: "./gtfs.sqlite"; 
+    }
+
+}
+
+    // Step 10. Defining zone_id as integer with a constraint
+
+    valuetype zone_id oftype integer {
+        constraints: [
+        OnlyValidZone,
+    ];
+}   
+
+    //Step 11.  Puting constraint to make sure  zone_id= 1645
+
+    constraint OnlyValidZone on integer:
+        value == 1645;
+
