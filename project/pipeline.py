@@ -106,7 +106,7 @@ print("Download Completed")
 
 print("Reading CSV files")
 csv_directory = '../data/downloads'
-sqlite_db_path = '../data/database.sqlite'
+sqlite_db_path = '../data/database2.sqlite'
 print("Creating DB file")
 csv_to_sqlite(csv_directory, sqlite_db_path)
 
