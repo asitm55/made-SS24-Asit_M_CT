@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: main
+
       - name : Starting Pipeline
-        working-directory: ./project
         run : ls
 
       - name : Starting Test
-        working-directory: ./project
+       
         run : ls
