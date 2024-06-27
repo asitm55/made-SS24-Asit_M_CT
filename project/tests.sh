@@ -1,8 +1,6 @@
 #!/bin/bash
-# Print setup message
 echo "Setting up the test environment..."
 # Clean up environment
-
 # Print completion message
 echo "Running Test."
 python test.py
