@@ -8,7 +8,7 @@ if [ $? -ne 0 ]; then
     echo "Test Failed"
     exit 1
 fi
-echo "Test environment cleaned up"
+echo "Test environment cleaned up."
 #bash
 
 
