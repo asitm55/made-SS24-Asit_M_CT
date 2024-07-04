@@ -13,7 +13,6 @@ Industrialization and Its Impact on India's Air Quality
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
 My plan is to explore how industrialization affects the environment negatively with respect to state environmental policies. Specifically, we will examine how an emerging economy like India is suffering from pollution due to industrialization, and how its environmental policies address these issues. We will focus solely on India, as we have data related to this country. Additionally, we will explore related and promising data, such as green energy and green finance, related to CO2 emission projections over the years. This will provide a more educated estimate regarding different factors.
-## Datasources
 
 ## Datasources
   # This analysis looks at how automobile production affects air quality in India by comparing air quality data with automobile production figures.
